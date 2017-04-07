@@ -4,8 +4,10 @@ folder=$1
 depth=$2
 
 if (test -z "$folder"); then
-    echo "Usage: sh git-pull-master.sh @git-parent-folder [@depth]"
-    exit 1
+    #echo "Usage: sh git-pull-master.sh @git-parent-folder [@depth]"
+    echo "use current folder:`pwd`"
+    folder=`pwd`
+    #exit 1
 fi
 
 if (test -z "$depth"); then
