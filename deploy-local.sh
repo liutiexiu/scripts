@@ -15,6 +15,7 @@ BIN="/home/mmears/bin"
 
 mkdir -p $TMP
 
+##build##
 mvn $1 -Dmaven.test.skip=true clean package
 
 if [ -d "target" ];then
