@@ -25,6 +25,7 @@ else
   exit 1
 fi
 
+##find target##
 cd target
 
 #TIME=`date "+%Y%m%d_%H:%M:%S"`
@@ -43,20 +44,24 @@ echo "service:$SRV, target:$TAR"
 
 rm -rf $TMP/*
 cp $TAR $TMP
+
+##deploy##
 cd $TMP
 
-rm -rf $DPL/${TAR%.*}-$TIME
-unzip -q -d $DPL/${TAR%.*}-$TIME $TAR 
+scp $TAR onebox:$TMP
 
-rm -f $BIN/$SRV
-ln -s $DPL/${TAR%.*}-$TIME $BIN/$SRV
+ssh onebox "rm -rf $DPL/${TAR%.*}-$TIME"
+ssh onebox "cd $TMP;unzip -q -d $DPL/${TAR%.*}-$TIME $TAR"
 
-ls -al $BIN/$SRV
+ssh onebox "rm -f $BIN/$SRV"
+ssh onebox "ln -s $DPL/${TAR%.*}-$TIME $BIN/$SRV"
+
+ssh onebox "ls -al $BIN/$SRV"
 
 if [ -z HAS_WAR ];then
   echo "restart service please"
 else
-  /home/liushuai/bin/resin/bin/resin.sh --server $SRV kill
+  ssh onebox "\$HOME/bin/resin/bin/resin.sh --server $SRV kill"
   sleep 1
-  /home/liushuai/bin/resin/bin/resin.sh --server $SRV start
+  ssh onebox "\$HOME/bin/resin/bin/resin.sh --server $SRV start"
 fi
