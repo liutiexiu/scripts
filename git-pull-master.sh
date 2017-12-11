@@ -46,7 +46,7 @@ function git_pull() {
         git_check_branch "$branch"
         if [ $? -eq 0 ];then
             echo "pull $branch in `pwd`"
-            git pull
+            git pull --rebase
         fi
     else
         if [ $depth -gt 0 ];then
