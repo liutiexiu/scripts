@@ -47,6 +47,8 @@ function git_pull() {
         if [ $? -eq 0 ];then
             echo "pull $branch in `pwd`"
             git pull --rebase
+            # if we push master
+            echo "diff lines agains origin/master `git diff origin/master | wc -l`"
         fi
     else
         if [ $depth -gt 0 ];then
