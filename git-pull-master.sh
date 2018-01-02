@@ -25,7 +25,7 @@ function git_check_branch() {
     local ref=$(git symbolic-ref HEAD 2> /dev/null) || return;
     local branch="${ref#refs/heads/}"
   
-    if [ $target_branch == $branch ]; then
+    if [[ $target_branch == $branch ]]; then
         return 0
     else
         return -1
