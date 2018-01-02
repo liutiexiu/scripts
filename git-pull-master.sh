@@ -50,7 +50,7 @@ function git_pull() {
             # if always push master
             diff=`git diff origin/master`
             if [ -n "$diff" ]; then
-              echo "diff lines agains origin/master `git diff origin/master | wc -l`"
+              echo "diff lines against origin/master `git diff origin/master | wc -l`"
               echo ""
             fi
         fi
