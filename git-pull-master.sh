@@ -73,4 +73,13 @@ git_pull "$folder" "master" "$depth"
 
 cd $origin_work_path
 
+#find rebase conflict
+echo "============="
+echo "git pull done"
+echo ""
+
+source ~/.bash_alias
+echo "git-st:"
+git-st
+
 exit 0
