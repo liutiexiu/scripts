@@ -1,5 +1,9 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
 folder=$1
 depth=$2
 
@@ -13,6 +17,8 @@ fi
 if (test -z "$depth"); then
     depth=3
 fi
+
+echo ""
 
 function git_check_branch() {
     local target_branch=$1
@@ -50,7 +56,7 @@ function git_pull() {
             # if always push master
             diff=`git diff origin/master`
             if [ -n "$diff" ]; then
-              echo "diff lines against origin/master `git diff origin/master | wc -l`"
+              echo "diff lines against origin/master    ${RED}=[`git diff origin/master | wc -l | xargs` lines]=${NC}"
               echo ""
             fi
         fi
