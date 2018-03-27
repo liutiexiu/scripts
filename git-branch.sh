@@ -4,6 +4,11 @@ TARGET=$1
 FOLDER=$2
 DEPTH=$3
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # Color END
+
 if (test -z "$TARGET"); then
     TARGET="master"
 fi
@@ -35,10 +40,10 @@ function git_branch_() {
         local ref=$(git symbolic-ref HEAD 2> /dev/null) || return;
         local branch="${ref#refs/heads/}"
         local relative=`echo "$target" | rev | cut -d '/' -f -$[$DEPTH-$depth] | rev`
-        if [[ $branch == $TARGET ]]; then
-            echo "$relative at [$branch]"
-        else
-            echo "==$relative at [$branch]=="
+        local status=`git status -b --porcelain`
+        local is_master=`echo $status | grep master | grep -v ahead`
+        if (test -z "$is_master");then
+            echo "${RED}$relative:${NC}\n$status\n"
         fi
     else
         if [ $depth -gt 0 ];then
