@@ -87,7 +87,7 @@ echo "git pull done"
 echo ""
 
 source ~/.bash_alias
-echo "git-st:"
+echo "git-st:(@ `date`)"
 git-st
 
 exit 0
