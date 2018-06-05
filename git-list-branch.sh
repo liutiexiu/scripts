@@ -25,9 +25,11 @@ function git_list_branch_() {
     cd $target
     if [ -d ".git/" ];then
         local count=`git branch | wc -l`
-        if [ $count -gt 1 ];then
+        local stash_count=`git stash list | wc -l`
+        if [ $count -gt 1 -o $stash_count -gt 0 ];then
             echo "repository: `pwd | awk -F "$origin_work_path" '{print $2}' | sed -e 's/^\///g'`"
             git branch
+            git stash list
             echo ""
         fi
     else
