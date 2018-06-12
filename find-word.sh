@@ -1,8 +1,18 @@
 #!/bin/bash
 
-find . -name *.kt | grep -v "/target/" | xargs grep -Hni "$1"
-find . -name *.java | grep -v "/target/" | xargs grep -Hni "$1"
+WORD=$1
+FILE_EXT=$2
 
-find . -name *.properties | grep -v "/target/" | xargs grep -Hni "$1"
-find . -name *.json | grep -v "/target/" | xargs grep -Hni "$1"
+if [ -z $FILE_EXT ]; then
 
+  find . -name *.kt | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+  find . -name *.java | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+
+  find . -name *.properties | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+  find . -name *.json | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+
+else
+
+  find . -name "*.$FILE_EXT" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+
+fi
