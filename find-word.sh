@@ -12,6 +12,9 @@ if [ -z $FILE_EXT ]; then
   find . -name "*.properties" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
   find . -name "*.json" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
   find . -name "*.xml" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+  find . -name "*.sql" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+  find . -name "*.txt" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
+  find . -name "*.csv" | grep -v "/target/" | xargs grep --color -Hni "$WORD"
 
 else
 
