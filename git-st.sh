@@ -1,5 +1,9 @@
 #!/bin/bash
 
+LIGHT_BLUE='\033[38;5;14m'
+ORANGE='\033[38;5;9m'
+NC='\033[0m' # Color END
+
 FOLDER=$1
 DEPTH=$2
 
@@ -10,7 +14,7 @@ if (test -z "$FOLDER"); then
 fi
 
 if (test -z "$DEPTH"); then
-    DEPTH=2
+    DEPTH=3
     echo "set depth:$DEPTH"
 fi
 
@@ -31,7 +35,7 @@ function git_st_() {
             local ref=$(git symbolic-ref HEAD 2> /dev/null) || return;
             local branch="${ref#refs/heads/}"
             local relative=`echo "$target" | rev | cut -d '/' -f -$[$DEPTH-$depth] | rev`
-            echo "$relative($branch):"
+            echo "${LIGHT_BLUE}$relative${NC} (${ORANGE}$branch${NC}):"
             git st
             echo ""
         fi

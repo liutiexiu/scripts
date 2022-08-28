@@ -86,8 +86,7 @@ echo "============="
 echo "git pull done"
 echo ""
 
-source ~/.bash_alias
 echo "git-st:(@ `date`)"
-git-st
+git-st.sh
 
 exit 0
